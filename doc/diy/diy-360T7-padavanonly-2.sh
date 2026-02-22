@@ -56,7 +56,7 @@ UPDATE_PACKAGE() {
 sed -i 's/192.168.6.1/192.168.50.1/g' package/base-files/files/bin/config_generate   # 定制默认IP
 #sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt By guorong ($(date +%Y-%m-%d %H:%M)) '/g" package/base-files/files/etc/openwrt_release
 # 移除重复软件包
-#rm -rf feeds/luci/themes/luci-theme-argon
+rm -rf feeds/luci/themes/luci-theme-argon
 
 # 修改 argon 为默认主题,可根据你喜欢的修改成其他的（不选择那些会自动改变为默认主题的主题才有效果）
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
@@ -67,7 +67,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 
 git clone --depth 1 https://github.com/sbwml/luci-theme-argon package/luci-app-argon-config
 git clone --depth 1 https://github.com/sbwml/luci-theme-argon-config package/luci-app-argon-config
-git clone --depth 1 https://github.com/sirpdboy/luci-app-netspeedtes package/luci-app-netspeedtes
+git clone --depth 1 https://github.com/sirpdboy/luci-app-netspeedtest package/luci-app-netspeedtest
 git clone --depth 1 https://github.com/torguardvpn/luci-app-easymesh package/luci-app-easymesh
 git clone --depth 1 https://github.com/xiaozhuai/luci-app-filebrowser package/luci-app-filebrowser
 
