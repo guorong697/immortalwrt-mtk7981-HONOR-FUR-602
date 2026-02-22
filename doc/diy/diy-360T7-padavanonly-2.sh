@@ -65,16 +65,21 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 #git clone --depth 1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 #git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 
+git clone --depth 1 https://github.com/sbwml/luci-theme-argon package/luci-app-argon-config
+git clone --depth 1 https://github.com/sbwml/luci-theme-argon-config package/luci-app-argon-config
+git clone --depth 1 https://github.com/sirpdboy/luci-app-netspeedtes package/luci-app-netspeedtes
+git clone --depth 1 https://github.com/torguardvpn/luci-app-easymesh package/luci-app-easymesh
+git clone --depth 1 https://github.com/xiaozhuai/luci-app-filebrowser package/luci-app-filebrowser
 
 
 
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
-UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon-config" "openwrt-24.10"
+#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
+#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon-config" "openwrt-24.10"
 
-UPDATE_PACKAGE "netspeedtest" "sirpdboy/luci-app-netspeedtest" "master" "" "homebox speedtest"
-UPDATE_PACKAGE "easymesh" "master-yun-yun/luci-app-istore/tree/master/luci-app-easymesh" "master"
-UPDATE_PACKAGE "filebrowser" "master-yun-yun/luci-app-istore/tree/master/filebrowser" "master"
+#UPDATE_PACKAGE "netspeedtest" "sirpdboy/luci-app-netspeedtest" "master" "" "homebox speedtest"
+#UPDATE_PACKAGE "easymesh" "master-yun-yun/luci-app-istore/tree/master/luci-app-easymesh" "master"
+#UPDATE_PACKAGE "filebrowser" "master-yun-yun/luci-app-istore/tree/master/filebrowser" "master"
 
 # 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
 #sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
