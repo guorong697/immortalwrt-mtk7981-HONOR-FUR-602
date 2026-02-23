@@ -76,7 +76,6 @@ UPDATE_PACKAGE "viking" "VIKINGYFY/packages" "main" "" "luci-app-timewol luci-ap
 UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
 UPDATE_PACKAGE "easymesh" "torguardvpn/luci-app-easymesh" "main"
 UPDATE_PACKAGE "zerotier" "rufengsuixing/luci-app-zerotier" "master"
-UPDATE_PACKAGE "ttyd" "ozon/luci-app-ttyd" "master"
 
 #更新软件包版本
 UPDATE_VERSION() {
