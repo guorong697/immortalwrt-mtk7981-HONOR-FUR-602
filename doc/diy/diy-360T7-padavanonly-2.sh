@@ -1,14 +1,4 @@
 #!/bin/bash
-#
-# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
-# https://github.com/P3TERX/Actions-OpenWrt
-# File name: diy-part2.sh
-# Description: OpenWrt DIY script part 2 (After Update feeds)
-#
 
 #安装和更新软件包
 UPDATE_PACKAGE() {
@@ -50,73 +40,85 @@ UPDATE_PACKAGE() {
 	fi
 }
 
-
-
-#修改默认IP
-sed -i 's/192.168.6.1/192.168.50.1/g' package/base-files/files/bin/config_generate   # 定制默认IP
-#sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt By guorong ($(date +%Y-%m-%d %H:%M)) '/g" package/base-files/files/etc/openwrt_release
-# 移除重复软件包
-rm -rf feeds/luci/themes/luci-theme-argon
-
-# 修改 argon 为默认主题,可根据你喜欢的修改成其他的（不选择那些会自动改变为默认主题的主题才有效果）
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-
-# Themes
-#git clone --depth 1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
-#git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
-
-git clone --depth 1 https://github.com/sbwml/luci-theme-argon package/luci-app-argon-config
-git clone --depth 1 https://github.com/sbwml/luci-theme-argon-config package/luci-app-argon-config
-git clone --depth 1 https://github.com/sirpdboy/luci-app-netspeedtest package/luci-app-netspeedtest
-git clone --depth 1 https://github.com/torguardvpn/luci-app-easymesh package/luci-app-easymesh
-git clone --depth 1 https://github.com/xiaozhuai/luci-app-filebrowser package/luci-app-filebrowser
-
-
+# 调用示例
+# UPDATE_PACKAGE "OpenAppFilter" "destan19/OpenAppFilter" "master" "" "custom_name1 custom_name2"
+# UPDATE_PACKAGE "open-app-filter" "destan19/OpenAppFilter" "master" "" "luci-app-appfilter oaf" 这样会把原有的open-app-filter，luci-app-appfilter，oaf相关组件删除，不会出现coremark错误。
 
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
-#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon-config" "openwrt-24.10"
+UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
+UPDATE_PACKAGE "aurora" "eamonxg/luci-theme-aurora" "master"
+UPDATE_PACKAGE "aurora-config" "eamonxg/luci-app-aurora-config" "master"
+UPDATE_PACKAGE "kucat" "sirpdboy/luci-theme-kucat" "master"
+UPDATE_PACKAGE "kucat-config" "sirpdboy/luci-app-kucat-config" "master"
 
-#UPDATE_PACKAGE "netspeedtest" "sirpdboy/luci-app-netspeedtest" "master" "" "homebox speedtest"
-#UPDATE_PACKAGE "easymesh" "master-yun-yun/luci-app-istore/tree/master/luci-app-easymesh" "master"
-#UPDATE_PACKAGE "filebrowser" "master-yun-yun/luci-app-istore/tree/master/filebrowser" "master"
+# UPDATE_PACKAGE "homeproxy" "VIKINGYFY/homeproxy" "main"
+# UPDATE_PACKAGE "momo" "nikkinikki-org/OpenWrt-momo" "main"
+# UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
+# UPDATE_PACKAGE "openclash" "vernesong/OpenClash" "dev" "pkg"
+UPDATE_PACKAGE "passwall" "Openwrt-Passwall/openwrt-passwall" "main" "pkg"
+UPDATE_PACKAGE "passwall2" "Openwrt-Passwall/openwrt-passwall2" "main" "pkg"
 
-# 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
-#sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
+UPDATE_PACKAGE "luci-app-tailscale" "asvow/luci-app-tailscale" "main"
 
-# 添加额外软件包
-# git clone --depth 1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
-# git clone --depth 1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
-# git clone --depth 1 -b lede https://github.com/pymumu/luci-app-smartdns package/luci-app-smartdns
+UPDATE_PACKAGE "ddns-go" "sirpdboy/luci-app-ddns-go" "main"
+UPDATE_PACKAGE "diskman" "lisaac/luci-app-diskman" "master"
+UPDATE_PACKAGE "easytier" "EasyTier/luci-app-easytier" "main"
+UPDATE_PACKAGE "fancontrol" "rockjake/luci-app-fancontrol" "main"
+UPDATE_PACKAGE "gecoosac" "lwb1978/openwrt-gecoosac" "main"
+UPDATE_PACKAGE "mosdns" "sbwml/luci-app-mosdns" "v5" "" "v2dat"
+UPDATE_PACKAGE "netspeedtest" "sirpdboy/luci-app-netspeedtest" "master" "" "homebox speedtest"
+UPDATE_PACKAGE "openlist2" "sbwml/luci-app-openlist2" "main"
+UPDATE_PACKAGE "partexp" "sirpdboy/luci-app-partexp" "main"
+UPDATE_PACKAGE "qbittorrent" "sbwml/luci-app-qbittorrent" "master" "" "qt6base qt6tools rblibtorrent"
+UPDATE_PACKAGE "qmodem" "FUjr/QModem" "main"
+UPDATE_PACKAGE "quickfile" "sbwml/luci-app-quickfile" "main"
+UPDATE_PACKAGE "viking" "VIKINGYFY/packages" "main" "" "luci-app-timewol luci-app-wolplus"
+UPDATE_PACKAGE "vnt" "lmq8267/luci-app-vnt" "main"
+UPDATE_PACKAGE "easymesh" "torguardvpn/luci-app-easymesh" "main"
+UPDATE_PACKAGE "zerotier" "rufengsuixing/luci-app-zerotier" "main"
+UPDATE_PACKAGE "ttyd" "ozon/luci-app-ttyd" "main"
 
-# 科学上网插件
-# svn co https://github.com/kiddin9/openwrt-bypass/trunk/luci-app-bypass package/luci-app-bypass
-# svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
-# svn co https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall package/luci-app-passwall
-# svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/luci-app-ssr-plus
+#更新软件包版本
+UPDATE_VERSION() {
+	local PKG_NAME=$1
+	local PKG_MARK=${2:-false}
+	local PKG_FILES=$(find ./ ../feeds/packages/ -maxdepth 3 -type f -wholename "*/$PKG_NAME/Makefile")
 
-# 科学上网插件依赖
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/brook package/brook
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/chinadns-ng package/chinadns-ng
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/dns2socks package/dns2socks
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/dns2tcp package/dns2tcp
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/hysteria package/hysteria
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/ipt2socks package/ipt2socks
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/microsocks package/microsocks
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/naiveproxy package/naiveproxy
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/pdnsd-alt package/pdnsd-alt
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/sagernet-core package/sagernet-core
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/ssocks package/ssocks
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/tcping package/tcping
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-go package/trojan-go
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-plus package/trojan-plus
-# svn co https://github.com/xiaorouji/openwrt-passwall/trunk/v2ray-geodata package/v2ray-geodata
-# svn co https://github.com/fw876/helloworld/trunk/simple-obfs package/simple-obfs
-# svn co https://github.com/fw876/helloworld/trunk/v2ray-core package/v2ray-core
-# svn co https://github.com/fw876/helloworld/trunk/v2ray-plugin package/v2ray-plugin
-# svn co https://github.com/fw876/helloworld/trunk/shadowsocks-rust package/shadowsocks-rust
-# svn co https://github.com/fw876/helloworld/trunk/shadowsocksr-libev package/shadowsocksr-libev
-# svn co https://github.com/fw876/helloworld/trunk/xray-core package/xray-core
-# svn co https://github.com/fw876/helloworld/trunk/xray-plugin package/xray-plugin
-# svn co https://github.com/fw876/helloworld/trunk/lua-neturl package/lua-neturl
-# svn co https://github.com/fw876/helloworld/trunk/trojan package/trojan
+	if [ -z "$PKG_FILES" ]; then
+		echo "$PKG_NAME not found!"
+		return
+	fi
+
+	echo -e "\n$PKG_NAME version update has started!"
+
+	for PKG_FILE in $PKG_FILES; do
+		local PKG_REPO=$(grep -Po "PKG_SOURCE_URL:=https://.*github.com/\K[^/]+/[^/]+(?=.*)" $PKG_FILE)
+		local PKG_TAG=$(curl -sL "https://api.github.com/repos/$PKG_REPO/releases" | jq -r "map(select(.prerelease == $PKG_MARK)) | first | .tag_name")
+
+		local OLD_VER=$(grep -Po "PKG_VERSION:=\K.*" "$PKG_FILE")
+		local OLD_URL=$(grep -Po "PKG_SOURCE_URL:=\K.*" "$PKG_FILE")
+		local OLD_FILE=$(grep -Po "PKG_SOURCE:=\K.*" "$PKG_FILE")
+		local OLD_HASH=$(grep -Po "PKG_HASH:=\K.*" "$PKG_FILE")
+
+		local PKG_URL=$([[ "$OLD_URL" == *"releases"* ]] && echo "${OLD_URL%/}/$OLD_FILE" || echo "${OLD_URL%/}")
+
+		local NEW_VER=$(echo $PKG_TAG | sed -E 's/[^0-9]+/\./g; s/^\.|\.$//g')
+		local NEW_URL=$(echo $PKG_URL | sed "s/\$(PKG_VERSION)/$NEW_VER/g; s/\$(PKG_NAME)/$PKG_NAME/g")
+		local NEW_HASH=$(curl -sL "$NEW_URL" | sha256sum | cut -d ' ' -f 1)
+
+		echo "old version: $OLD_VER $OLD_HASH"
+		echo "new version: $NEW_VER $NEW_HASH"
+
+		if [[ "$NEW_VER" =~ ^[0-9].* ]] && dpkg --compare-versions "$OLD_VER" lt "$NEW_VER"; then
+			sed -i "s/PKG_VERSION:=.*/PKG_VERSION:=$NEW_VER/g" "$PKG_FILE"
+			sed -i "s/PKG_HASH:=.*/PKG_HASH:=$NEW_HASH/g" "$PKG_FILE"
+			echo "$PKG_FILE version has been updated!"
+		else
+			echo "$PKG_FILE version is already the latest!"
+		fi
+	done
+}
+
+#UPDATE_VERSION "软件包名" "测试版，true，可选，默认为否"
+UPDATE_VERSION "sing-box"
+#UPDATE_VERSION "tailscale"
