@@ -51,6 +51,21 @@ jobs:
            sed -i '/.cn\//d; /tencent/d; /aliyun/d' "$PROJECT_MIRRORS_FILE"
          fi
 
+    # ====================== 新增步骤：修改feeds.conf.default ======================
+    - name: Add small-package to feeds.conf.default
+      working-directory: /workdir/openwrt  # 进入OpenWRT源码根目录
+      run: |
+        # 先检查该行是否已存在，避免重复添加
+        if ! grep -q "src-git smpackage https://github.com/kenzok8/small-package" $FEEDS_CONF; then
+          # 追加一行到feeds.conf.default末尾
+          echo "src-git smpackage https://github.com/kenzok8/small-package" >> $FEEDS_CONF
+          echo "Successfully added small-package to $FEEDS_CONF"
+          # 可选：打印文件内容验证
+          cat $FEEDS_CONF
+        else
+          echo "small-package already exists in $FEEDS_CONF, skip adding"
+        fi
+
     
     - name: Cache
       uses: klever1988/cachewrtbuild@main
