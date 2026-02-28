@@ -13,7 +13,7 @@ on:
 
 env:
   REPO_URL: https://github.com/guorong697/immortalwrt-24.10
-  REPO_BRANCH: main
+  REPO_BRANCH: 2410
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: ./doc/config/mt7981-ax3000-mtwifi-cfg.config
   DIY_P1_SH: ./doc/diy/diy-360T7-hanwckf-1.sh
