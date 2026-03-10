@@ -8,8 +8,6 @@ on:
          description: 'clean ccache'
          default: 'false'
 
-  schedule:
-    - cron: '0 17 * * 1'
 
 env:
   REPO_URL: https://github.com/hanwckf/immortalwrt-mt798x
